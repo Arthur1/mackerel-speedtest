@@ -39,6 +39,11 @@ func (e *MackerelExporter) Export(metrics *SpeedTestMetrics) error {
 			Time:  ts,
 			Value: metrics.UploadBandwidthBps,
 		},
+		{
+			Name:  "speedtest.packet.loss_percentage",
+			Time:  ts,
+			Value: metrics.PacketLossPercentage,
+		},
 	})
 	return err
 }

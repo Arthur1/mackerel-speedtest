@@ -12,6 +12,7 @@ type SpeedTestMetrics struct {
 	PingJitter time.Duration
 	DownloadBandwidthBps uint64
 	UploadBandwidthBps uint64
+	PacketLossPercentage float64
 }
 
 type SpeedTestExecutor struct {
@@ -45,6 +46,7 @@ func (e *SpeedTestExecutor) Execute() (*SpeedTestMetrics, error) {
 		PingJitter: time.Duration(result.Ping.Jitter * float64(time.Millisecond)),
 		DownloadBandwidthBps: result.Download.Bandwidth * 8, // bytes/sec -> bits/sec
 		UploadBandwidthBps: result.Upload.Bandwidth * 8, // bytes/sec -> bits/sec
+		PacketLossPercentage: result.PacketLoss,
 	}
 	return metrics, nil
 }
